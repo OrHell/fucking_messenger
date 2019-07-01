@@ -1,4 +1,7 @@
 from PIL import Image, ImageDraw
+def count_word(word):
+	count = len(word)
+	return count
 
 def write_def():
 	file = Image.new('RGB',(1, 400))
@@ -14,13 +17,18 @@ def write_def():
 				'h':(15,44,88),'j':(189,188,116),'k':(11,114,115),'l':(124,125,198),'z':(198,152,154),'x':(44,75,188),'c':(59,89,156),'v':(165,166,138),'b':(128,129,11),'b':(11,13,112),
 				'n':(3,2,1),'m':(255,12,13),' ':(74,38,238),'ы':(74,74,175)}
 	word_list = list(word)
-
-	count = len(word_list)
+	global count
+	#count = len(word_list)
+	count = count_word(word_list)
 	null_arg = 0
 	fuck_arg = 0
 	first_iter = 0
 	second_iter = 0
-	
+
+	file = Image.new('RGB',(1, count))
+	file.save('message.png')
+	image_file = Image.open('message.png')
+
 	for null_arg in range(fuck_arg,count):
 		image_file.putpixel((fuck_arg,null_arg),(word_dict[word_list[null_arg]]))
 		
@@ -50,7 +58,7 @@ def read_def():
 #			pixel_color = image_file.getpixel((first_iter,second_iter))
 #			if pixel_color in color_dict:
 #				word_list = word_list + str(color_dict[pixel_color])
-	for i in range(0,400):
+	for i in range(0,count):
 		pixel_color = image_file.getpixel((0,i))
 		if pixel_color in color_dict:
 			word_list = word_list + str(color_dict[pixel_color])				
